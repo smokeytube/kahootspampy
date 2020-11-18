@@ -11,6 +11,11 @@ def ratcheck():
     print (int(var1.get()))
 Checkbutton(win, text="School appropriate names", variable=var1, command=ratcheck).place(x=150, y=100)
 
+var2 = IntVar()
+def ratcheck2():
+    print (int(var2.get()))
+Checkbutton(win, text="Friendly Nick Generator", variable=var2, command=ratcheck2).place(x=150, y=140)
+
 heading = Label(win, text="Input into the feilds")
 Label(win, text="Made by Zach").place(x=200, y=10)
 Label(win, text="Bot your teacher!").place(x=200, y=30)
@@ -39,6 +44,7 @@ code22 = int(code22.get())
 botnum = int(botnum.get())
 chromever = int(chromever.get())
 appropriatenames = int(var1.get())
+nickgen = int(var2.get())
 
 
 if chromever == 85:
@@ -57,32 +63,54 @@ driver.get('https://kahoot.it/')
 time.sleep(2)
 tab = 1
 nume = 9
-if appropriatenames == 0:
-    namelist = open('names.txt', encoding="utf8")
-elif appropriatenames == 1:
-    namelist = open('namesappropriate.txt', encoding="utf8")
+if nickgen == 1:
+    while botnum > 0:
+        while tab != nume:
+            time.sleep(0.5)
+            code_input = driver.find_element_by_xpath('//*[@id="game-input"]')
+            code_input.click()
+            code_input.send_keys(code22)
+            submit_code = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div/div/main/div/form/button')
+            submit_code.click()
+            spin = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div[2]/div/div[2]/button')
+            spin.click()
+            go = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div[2]/div/div[2]/button[2]')
+            go.click()
+            time.sleep(0.5)
+            driver.execute_script("window.open('https://kahoot.it')")
+            driver.switch_to.window(driver.window_handles[tab])
+            botnum = botnum - 1
+            tab = tab + 1
+            driver.delete_cookie
+        time.sleep(60)
+        nume = nume + 7
 else:
-    namelist = ("How tf did you get here??")
-    print (namelist)
-    time.sleep(9223372036854775807)
-while botnum > 0:
-    while tab != nume:
-        name = namelist.readline()
-        time.sleep(0.5)
-        code_input = driver.find_element_by_xpath('//*[@id="game-input"]')
-        code_input.click()
-        code_input.send_keys(code22)
-        submit_code = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div/div/main/div/form/button')
-        submit_code.click()
-        name_input = driver.find_element_by_xpath('//*[@id="nickname"]')
-        name_input.click()
-        pyautogui.typewrite(name)
-        submit_name = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div/div/main/div/form/button')
-        time.sleep(0.5)
-        driver.execute_script("window.open('https://kahoot.it')")
-        driver.switch_to.window(driver.window_handles[tab])
-        botnum = botnum - 1
-        tab = tab + 1
-        driver.delete_cookie
-    time.sleep(60)
-    nume = nume + 7
+    if appropriatenames == 0:
+        namelist = open('names.txt', encoding="utf8")
+    elif appropriatenames == 1:
+        namelist = open('namesappropriate.txt', encoding="utf8")
+    else:
+        namelist = ("How tf did you get here??")
+        print (namelist)
+        time.sleep(9223372036854775807)
+    while botnum > 0:
+        while tab != nume:
+            name = namelist.readline()
+            time.sleep(0.5)
+            code_input = driver.find_element_by_xpath('//*[@id="game-input"]')
+            code_input.click()
+            code_input.send_keys(code22)
+            submit_code = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div/div/main/div/form/button')
+            submit_code.click()
+            name_input = driver.find_element_by_xpath('//*[@id="nickname"]')
+            name_input.click()
+            pyautogui.typewrite(name)
+            submit_name = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div/div/main/div/form/button')
+            time.sleep(0.5)
+            driver.execute_script("window.open('https://kahoot.it')")
+            driver.switch_to.window(driver.window_handles[tab])
+            botnum = botnum - 1
+            tab = tab + 1
+            driver.delete_cookie
+        time.sleep(60)
+        nume = nume + 7
