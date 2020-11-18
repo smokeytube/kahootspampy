@@ -6,11 +6,16 @@ from tkinter import *
 win = Tk()
 win.title("Kahoot Botter")
 win.geometry("350x260")
+var1 = IntVar()
+def ratcheck():
+    print (int(var1.get()))
+Checkbutton(win, text="School appropriate names", variable=var1, command=ratcheck).place(x=150, y=100)
+
 heading = Label(win, text="Input into the feilds")
 Label(win, text="Made by Zach").place(x=200, y=10)
 Label(win, text="Bot your teacher!").place(x=200, y=30)
 Label(win, text="Enter game code:").place(x=10, y=10)
-code22 = StringVar()
+code22 = IntVar()
 Entry(win, textvariable=code22, width=25, bg="gray").place(x=10, y=30)
 def code112():
     print (int(code22.get()))
@@ -33,6 +38,8 @@ win.mainloop()
 code22 = int(code22.get())
 botnum = int(botnum.get())
 chromever = int(chromever.get())
+appropriatenames = int(var1.get())
+
 
 if chromever == 85:
     chromedriverdir = 'chromedriver85.exe'
@@ -50,7 +57,14 @@ driver.get('https://kahoot.it/')
 time.sleep(2)
 tab = 1
 nume = 9
-namelist = open('names.txt', encoding="utf8")
+if appropriatenames == 0:
+    namelist = open('names.txt', encoding="utf8")
+elif appropriatenames == 1:
+    namelist = open('namesappropriate.txt', encoding="utf8")
+else:
+    namelist = ("How tf did you get here??")
+    print (namelist)
+    time.sleep(9223372036854775807)
 while botnum > 0:
     while tab != nume:
         name = namelist.readline()
