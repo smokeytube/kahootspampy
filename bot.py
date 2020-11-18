@@ -48,13 +48,15 @@ driver = webdriver.Chrome(chromedriverdir)
 driver.implicitly_wait(5)
 driver.get('https://kahoot.it/')
 time.sleep(2)
+tab = 1
+nume = 9
 namelist = open('names.txt', encoding="utf8")
-for word in namelist:
-    name = word
-    if botnum == 0:
-        time.sleep(10000)
-    else:
+while botnum > 0:
+    while tab != nume:
+        name = namelist.readline()
+        time.sleep(0.5)
         code_input = driver.find_element_by_xpath('//*[@id="game-input"]')
+        code_input.click()
         code_input.send_keys(code22)
         submit_code = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div/div/main/div/form/button')
         submit_code.click()
@@ -62,15 +64,11 @@ for word in namelist:
         name_input.click()
         pyautogui.typewrite(name)
         submit_name = driver.find_element_by_xpath('//*[@id="root"]/div[1]/div/div/main/div/form/button')
-        #submit_name.click()
-        time.sleep(10)
-        #pyautogui.hotkey('ctrl', 't')
-        driver.execute_script("window.open('https://kahoot.it', 'new window')")
-        time.sleep(10)
-        # driver.execute_script("window.open('');")
-        # newtab = driver.find_element_by_xpath('//*[@id="input"]')
-        # driver.implicitly_wait(5)
-        # newtab.send_keys('https://kahoot.it/')
-        botnum - 1
-    #pyautogui.press('control' + 't')
-    #driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't') 
+        time.sleep(0.5)
+        driver.execute_script("window.open('https://kahoot.it')")
+        driver.switch_to.window(driver.window_handles[tab])
+        botnum = botnum - 1
+        tab = tab + 1
+        driver.delete_cookie
+    time.sleep(60)
+    nume = nume + 7
