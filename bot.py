@@ -86,7 +86,7 @@ if nickgen == 1:
         nume = nume + 7
 else:
     if appropriatenames == 0:
-        namelist = open('names.txt', encoding="utf8")
+        namelist = open('boynames.txt', encoding="utf8")
     elif appropriatenames == 1:
         namelist = open('namesappropriate.txt', encoding="utf8")
     else:
